@@ -77,8 +77,8 @@ angular.module('osk').directive('guacOsk', [function guacOsk() {
                     keyboard = null;
                 }
 
-                // Load new keyboard
-                if (url) {
+                // Check that layout URL is valid and load new keyboard
+                if (url && /^(?=.*\.json$).*$/.test(url)) {
 
                     // Retrieve layout JSON
                     $http({
