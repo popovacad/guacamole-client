@@ -21,10 +21,6 @@
 
     "css" : [
         "totp.min.css"
-    ],
-
-    "resources" : {
-        "templates/authenticationCodeField.html" : "text/html"
-    }
+    ]
 
 }

@@ -102,7 +102,7 @@ angular.module('element').directive('guacResize', ['$document', function guacRes
             // Load blank contents
             resizeSensor.className = 'resize-sensor';
             resizeSensor.type      = 'text/html';
-            resizeSensor.data      = 'app/element/templates/blank.html';
+            resizeSensor.data      = 'blank.html';
 
             // Add resize sensor to associated element
             element.insertBefore(resizeSensor, element.firstChild);

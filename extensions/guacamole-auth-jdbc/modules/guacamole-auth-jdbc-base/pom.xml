@@ -59,6 +59,56 @@
                 </configuration>
             </plugin>
 
+            <!-- JS/CSS Minification Plugin -->
+            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.5</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                            <charset>UTF-8</charset>
+
+                            <webappSourceDir>${project.build.directory}/classes</webappSourceDir>
+                            <webappTargetDir>${project.build.directory}/classes</webappTargetDir>
+
+                            <cssSourceDir>/</cssSourceDir>
+
+                            <cssFinalFile>jdbc.css</cssFinalFile>
+
+                            <cssSourceIncludes>
+                                <cssSourceInclude>**/*.css</cssSourceInclude>
+                            </cssSourceIncludes>
+
+                            <cssSourceExcludes>
+                                <cssSourceExclude>jdbc.css</cssSourceExclude>
+                                <cssSourceExclude>jdbc.min.css</cssSourceExclude>
+                            </cssSourceExcludes>
+
+                            <jsSourceDir>/</jsSourceDir>
+                            
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Do not include unneeded CSS in resulting actual JAR file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>styles/**</exclude>
+                        <exclude>jdbc.css</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
             <!-- Verify format using Apache RAT -->
             <plugin>
                 <groupId>org.apache.rat</groupId>

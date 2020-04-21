@@ -17,11 +17,6 @@
 
     "js" : [
         "radius.min.js"
-    ],
-
-    "resources" : {
-        "templates/radiusResponseField.html" : "text/html",
-        "templates/radiusStateField.html"    : "text/html"
-    }
+    ]
 
 }

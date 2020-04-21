@@ -53,6 +53,80 @@
                 </configuration>
             </plugin>
 
+            <!-- JS/CSS Minification Plugin -->
+            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.5</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                            <charset>UTF-8</charset>
+
+                            <webappSourceDir>${project.build.directory}/classes</webappSourceDir>
+                            <webappTargetDir>${project.build.directory}/classes</webappTargetDir>
+
+                            <cssSourceDir>/</cssSourceDir>
+                            
+                            <cssFinalFile>quickconnect.css</cssFinalFile>
+
+                            <cssSourceIncludes>
+                                <cssSourceInclude>**/*.css</cssSourceInclude>
+                            </cssSourceIncludes>
+
+                            <cssSourceExcludes>
+                                <cssSourceExclude>quickconnect.css</cssSourceExclude>
+                                <cssSourceExclude>quickconnect.min.css</cssSourceExclude>
+                            </cssSourceExcludes>
+
+                            <jsSourceDir>/</jsSourceDir>
+                            
+                            <jsFinalFile>quickconnect.js</jsFinalFile>
+
+                            <jsSourceIncludes>
+                                <jsSourceInclude>**/*.js</jsSourceInclude>
+                            </jsSourceIncludes>
+                            
+                            <jsSourceExcludes>
+                                <jsSourceExclude>quickconnect.js</jsSourceExclude>
+                                <jsSourceExclude>quickconnect.min.js</jsSourceExclude>
+                                <!-- Do not minify and include tests -->
+                                <jsSourceExclude>**/*.test.js</jsSourceExclude>
+                            </jsSourceExcludes>
+                            
+                            <jsEngine>CLOSURE</jsEngine>
+
+                            <!-- Disable warnings for JSDoc annotations -->
+                            <closureWarningLevels>
+                                <misplacedTypeAnnotation>OFF</misplacedTypeAnnotation>
+                                <nonStandardJsDocs>OFF</nonStandardJsDocs>
+                            </closureWarningLevels>
+
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Do not include unneeded templates, JS and CSS in resulting actual JAR file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>controllers/**</exclude>
+                        <exclude>styles/**</exclude>
+                        <exclude>quickconnectModule.js</exclude>
+                        <exclude>quickconnect.js</exclude>
+                        <exclude>quickconnect.css</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
             <!-- Copy dependencies prior to packaging -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -90,56 +164,6 @@
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- JS/CSS Minification Plugin -->
-            <plugin>
-                <groupId>com.samaxes.maven</groupId>
-                <artifactId>minify-maven-plugin</artifactId>
-                <version>1.7.5</version>
-                <executions>
-                    <execution>
-                        <id>default-cli</id>
-                        <configuration>
-                            <charset>UTF-8</charset>
-
-                            <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
-                            <webappTargetDir>${project.build.directory}/classes</webappTargetDir>
-
-                            <cssSourceDir>/</cssSourceDir>
-                            <cssTargetDir>/</cssTargetDir>
-                            <cssFinalFile>quickconnect.css</cssFinalFile>
-
-                            <cssSourceIncludes>
-                                <cssSourceInclude>**/*.css</cssSourceInclude>
-                            </cssSourceIncludes>
-
-                            <jsSourceDir>/</jsSourceDir>
-                            <jsTargetDir>/</jsTargetDir>
-                            <jsFinalFile>quickconnect.js</jsFinalFile>
-
-                            <jsSourceIncludes>
-                                <jsSourceInclude>**/*.js</jsSourceInclude>
-                            </jsSourceIncludes>
-
-                            <!-- Do not minify and include tests -->
-                            <jsSourceExcludes>
-                                <jsSourceExclude>**/*.test.js</jsSourceExclude>
-                            </jsSourceExcludes>
-                            <jsEngine>CLOSURE</jsEngine>
-
-                            <!-- Disable warnings for JSDoc annotations -->
-                            <closureWarningLevels>
-                                <misplacedTypeAnnotation>OFF</misplacedTypeAnnotation>
-                                <nonStandardJsDocs>OFF</nonStandardJsDocs>
-                            </closureWarningLevels>
-
-                        </configuration>
-                        <goals>
-                            <goal>minify</goal>
                         </goals>
                     </execution>
                 </executions>

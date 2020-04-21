@@ -11,7 +11,7 @@
     ],
 
     "css" : [
-        "styles/jdbc.css"
+        "jdbc.min.css"
     ],
 
     "html" : [

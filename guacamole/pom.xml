@@ -108,9 +108,14 @@
                         </overlay>
                     </overlays>
 
-                    <!-- Do not include unpacked webjars in resulting actual WAR file -->
+                    <!-- Do not include unneeded templates, JS and CSS in resulting actual WAR file -->
                     <packagingExcludes>
-                        webjars/**
+                        app/**,
+                        generated/**,
+                        webjars/**,
+                        guacamole-common-js/**,
+                        guacamole.js,
+                        guacamole.css
                     </packagingExcludes>
             
                 </configuration>
@@ -141,7 +146,7 @@
                 <configuration>
                     <sourceDir>${basedir}/src/main/webapp/app/</sourceDir>
                     <include>**/*.html</include>
-                    <target>${basedir}/src/main/webapp/generated/templates-main/templates.js</target>
+                    <target>${project.build.directory}/${project.build.finalName}/generated/templates-main/templates.js</target>
                     <prefix>app</prefix>
                 </configuration>
             </plugin>
@@ -158,25 +163,21 @@
                             <charset>UTF-8</charset>
 
                             <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
+                            <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
 
                             <cssSourceDir>/</cssSourceDir>
-                            <cssTargetDir>/</cssTargetDir>
+                            
                             <cssFinalFile>guacamole.css</cssFinalFile>
-
-                            <cssSourceFiles>
-                                <cssSourceFile>license.txt</cssSourceFile>
-                            </cssSourceFiles>
                             
                             <cssSourceIncludes>
                                 <cssSourceInclude>app/**/*.css</cssSourceInclude>
                             </cssSourceIncludes>
 
                             <jsSourceDir>/</jsSourceDir>
-                            <jsTargetDir>/</jsTargetDir>
+                            
                             <jsFinalFile>guacamole.js</jsFinalFile>
                             
                             <jsSourceFiles>
-                                <jsSourceFile>license.txt</jsSourceFile>
                                 <jsSourceFile>guacamole-common-js/all.js</jsSourceFile>
                             </jsSourceFiles>
 
@@ -184,11 +185,12 @@
                                 <jsSourceInclude>app/**/*.js</jsSourceInclude>
                                 <jsSourceInclude>generated/**/*.js</jsSourceInclude>
                             </jsSourceIncludes>
-
-                            <!-- Do not minify and include tests -->
+                            
                             <jsSourceExcludes>
+                                <!-- Do not minify and include tests -->
                                 <jsSourceExclude>**/*.test.js</jsSourceExclude>
                             </jsSourceExcludes>
+                            
                             <jsEngine>CLOSURE</jsEngine>
 
                             <!-- Disable warnings for JSDoc annotations -->

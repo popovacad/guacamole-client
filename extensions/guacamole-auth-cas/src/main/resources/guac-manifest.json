@@ -21,10 +21,6 @@
 
     "css" : [
         "cas.min.css"
-    ],
-
-    "resources" : {
-        "templates/casTicketField.html" : "text/html"
-    }
+    ]
 
 }

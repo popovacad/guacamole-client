@@ -69,7 +69,7 @@
                 <configuration>
                     <sourceDir>${basedir}/src/main/resources</sourceDir>
                     <include>**/*.html</include>
-                    <target>${basedir}/src/main/resources/generated/templates-main/templates.js</target>
+                    <target>${project.build.directory}/classes/generated/templates-main/templates.js</target>
                     <prefix>app/ext/duo</prefix>
                 </configuration>
             </plugin>
@@ -85,38 +85,41 @@
                         <configuration>
                             <charset>UTF-8</charset>
 
-                            <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
+                            <webappSourceDir>${project.build.directory}/classes</webappSourceDir>
                             <webappTargetDir>${project.build.directory}/classes</webappTargetDir>
 
                             <cssSourceDir>/</cssSourceDir>
-                            <cssTargetDir>/</cssTargetDir>
+                            
                             <cssFinalFile>duo.css</cssFinalFile>
-
-                            <cssSourceFiles>
-                                <cssSourceFile>license.txt</cssSourceFile>
-                            </cssSourceFiles>
 
                             <cssSourceIncludes>
                                 <cssSourceInclude>**/*.css</cssSourceInclude>
                             </cssSourceIncludes>
 
+                            <cssSourceExcludes>
+                                <cssSourceExclude>duo.css</cssSourceExclude>
+                                <cssSourceExclude>duo.min.css</cssSourceExclude>
+                            </cssSourceExcludes>
+
                             <jsSourceDir>/</jsSourceDir>
-                            <jsTargetDir>/</jsTargetDir>
+                            
                             <jsFinalFile>duo.js</jsFinalFile>
 
                             <jsSourceFiles>
-                                <jsSourceFile>license.txt</jsSourceFile>
                                 <jsSourceFile>lib/DuoWeb/LICENSE.js</jsSourceFile>
                             </jsSourceFiles>
 
                             <jsSourceIncludes>
                                 <jsSourceInclude>**/*.js</jsSourceInclude>
                             </jsSourceIncludes>
-
-                            <!-- Do not minify and include tests -->
+                            
                             <jsSourceExcludes>
+                                <jsSourceExclude>duo.js</jsSourceExclude>
+                                <jsSourceExclude>duo.min.js</jsSourceExclude>
+                                <!-- Do not minify and include tests -->
                                 <jsSourceExclude>**/*.test.js</jsSourceExclude>
                             </jsSourceExcludes>
+                            
                             <jsEngine>CLOSURE</jsEngine>
 
                             <!-- Disable warnings for JSDoc annotations -->
@@ -129,6 +132,45 @@
                         <goals>
                             <goal>minify</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Do not include unneeded templates, JS and CSS in resulting actual JAR file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>config/**</exclude>
+                        <exclude>controllers/**</exclude>
+                        <exclude>generated/**</exclude>
+                        <exclude>styles/**</exclude>
+                        <exclude>templates/**</exclude>
+                        <exclude>duoModule.js</exclude>
+                        <exclude>duo.js</exclude>
+                        <exclude>duo.css</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <!-- Copy dependencies prior to packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>unpack-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>runtime</includeScope>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -151,26 +193,6 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Copy dependencies prior to packaging -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>unpack-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeScope>runtime</includeScope>
-                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

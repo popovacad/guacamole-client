@@ -69,7 +69,7 @@
                 <configuration>
                     <sourceDir>${basedir}/src/main/resources</sourceDir>
                     <include>**/*.html</include>
-                    <target>${basedir}/src/main/resources/generated/templates-main/templates.js</target>
+                    <target>${project.build.directory}/classes/generated/templates-main/templates.js</target>
                     <prefix>app/ext/radius</prefix>
                 </configuration>
             </plugin>
@@ -85,25 +85,26 @@
                         <configuration>
                             <charset>UTF-8</charset>
 
-                            <webappSourceDir>${basedir}/src/main/resources</webappSourceDir>
+                            <webappSourceDir>${project.build.directory}/classes</webappSourceDir>
                             <webappTargetDir>${project.build.directory}/classes</webappTargetDir>
 
-                            <jsSourceDir>/</jsSourceDir>
-                            <jsTargetDir>/</jsTargetDir>
-                            <jsFinalFile>radius.js</jsFinalFile>
+                            <cssSourceDir>/</cssSourceDir>
 
-                            <jsSourceFiles>
-                                <jsSourceFile>license.txt</jsSourceFile>
-                            </jsSourceFiles>
+                            <jsSourceDir>/</jsSourceDir>
+                            
+                            <jsFinalFile>radius.js</jsFinalFile>
 
                             <jsSourceIncludes>
                                 <jsSourceInclude>**/*.js</jsSourceInclude>
                             </jsSourceIncludes>
-
-                            <!-- Do not minify and include tests -->
+                            
                             <jsSourceExcludes>
+                                <jsSourceExclude>radius.js</jsSourceExclude>
+                                <jsSourceExclude>radius.min.js</jsSourceExclude>
+                                <!-- Do not minify and include tests -->
                                 <jsSourceExclude>**/*.test.js</jsSourceExclude>
                             </jsSourceExcludes>
+                            
                             <jsEngine>CLOSURE</jsEngine>
 
                             <!-- Disable warnings for JSDoc annotations -->
@@ -120,6 +121,22 @@
                 </executions>
             </plugin>
 
+            <!-- Do not include unneeded templates, JS and CSS in resulting actual JAR file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>config/**</exclude>
+                        <exclude>controllers/**</exclude>
+                        <exclude>generated/**</exclude>
+                        <exclude>templates/**</exclude>
+                        <exclude>radiusModule.js</exclude>
+                        <exclude>radius.js</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
 
             <!-- Copy dependencies prior to packaging -->
             <plugin>

@@ -72,7 +72,7 @@
                 <executions>
                     <execution>
                         <id>make-zip</id>
-                        <phase>package</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>attached</goal>
                         </goals>
@@ -96,10 +96,6 @@
                             <jsSourceDir>/</jsSourceDir>
                             <jsTargetDir>/</jsTargetDir>
                             <jsFinalFile>all.js</jsFinalFile>
-
-                            <jsSourceFiles>
-                                <jsSourceFile>common/license.js</jsSourceFile> 
-                            </jsSourceFiles>
 
                             <jsSourceIncludes>
                                 <jsSourceInclude>modules/**/*.js</jsSourceInclude>

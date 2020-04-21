@@ -21,10 +21,6 @@
 
     "css" : [
         "openid.min.css"
-    ],
-
-    "resources" : {
-        "templates/openidTokenField.html" : "text/html"
-    }
+    ]
 
 }

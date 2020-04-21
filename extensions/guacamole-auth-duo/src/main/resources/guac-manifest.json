@@ -21,10 +21,6 @@
 
     "css" : [
         "duo.min.css"
-    ],
-
-    "resources" : {
-        "templates/duoSignedResponseField.html" : "text/html"
-    }
+    ]
 
 }
