@@ -112,7 +112,7 @@
     -moz-background-size:    3em 3em;
     -webkit-background-size: 3em 3em;
     -khtml-background-size:  3em 3em;
-    background-image: url("images/guac-tricolor.png");
+    background-image: url("images/logo-256.png");
 }
 
 .login-ui.continuation div.login-dialog {
