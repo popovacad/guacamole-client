@@ -107,6 +107,11 @@
                             <type>zip</type>
                         </overlay>
                     </overlays>
+
+                    <!-- Do not include unpacked webjars in resulting actual WAR file -->
+                    <packagingExcludes>
+                        webjars/**
+                    </packagingExcludes>
             
                 </configuration>
                 <executions>
@@ -227,6 +232,336 @@
 
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+
+                                <!-- Polyfills for the Blob and FileSaver APIs -->
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>blob-polyfill</artifactId>
+                                    <version>1.0.20150320</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>filesaver</artifactId>
+                                    <version>1.3.3</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                                <!-- Lodash -->
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>lodash</artifactId>
+                                    <version>4.17.10</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                                <!-- jQuery -->
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>jquery</artifactId>
+                                    <version>3.3.1</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                                <!-- AngularJS -->
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>angular</artifactId>
+                                    <version>1.6.9</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>angular-route</artifactId>
+                                    <version>1.6.9</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>angular-touch</artifactId>
+                                    <version>1.6.9</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                                <!-- Shim allowing arbitrary retrieval/creation order for AngularJS modules -->
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>angular-module-shim</artifactId>
+                                    <version>0.0.4</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+                                
+                                <!-- Translation support for AngularJS -->
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>angular-translate</artifactId>
+                                    <version>2.16.0</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>angular-translate-interpolation-messageformat</artifactId>
+                                    <version>2.16.0</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>messageformat</artifactId>
+                                    <version>1.0.2</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.webjars.bower</groupId>
+                                    <artifactId>angular-translate-loader-static-files</artifactId>
+                                    <version>2.16.0</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                                <!-- Polyfill for <datalist> element support -->
+                                <artifactItem>
+                                    <groupId>org.webjars.npm</groupId>
+                                    <artifactId>datalist-polyfill</artifactId>
+                                    <version>1.14.0</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                                <!-- JSTZ for TimeZone Detection -->
+                                <artifactItem>
+                                    <groupId>org.webjars.npm</groupId>
+                                    <artifactId>jstz</artifactId>
+                                    <version>1.0.10</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                                <!-- Pickr (JavaScript color picker) -->
+                                <artifactItem>
+                                    <groupId>org.webjars.npm</groupId>
+                                    <artifactId>simonwep__pickr</artifactId>
+                                    <version>1.2.6</version>
+                                    <type>jar</type>
+                                    <includes>META-INF/resources/webjars/**/*</includes>
+                                    <outputDirectory>${project.build.directory}/${project.build.finalName}/webjars</outputDirectory>
+                                    <fileMappers>
+                                        <org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                            <pattern>^\QMETA-INF/resources/webjars/\E</pattern>
+                                            <replacement>./</replacement>
+                                        </org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+                                    </fileMappers>
+                                </artifactItem>
+
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-file</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <fileSets>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/blob-polyfill/1.0.20150320/Blob.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/Blob.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/filesaver/1.3.3/FileSaver.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/FileSaver.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/lodash/4.17.10/dist/lodash.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/lodash.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/jquery/3.3.1/dist/jquery.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/jquery.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/angular/1.6.9/angular.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/angular.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/angular-route/1.6.9/angular-route.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/angular-route.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/angular-touch/1.6.9/angular-touch.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/angular-touch.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/angular-module-shim/0.0.4/angular-module-shim.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/angular-module-shim.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/angular-translate/2.16.0/angular-translate.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/angular-translate.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/angular-translate-interpolation-messageformat/2.16.0/angular-translate-interpolation-messageformat.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/angular-translate-interpolation-messageformat.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/messageformat/1.0.2/messageformat.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/messageformat.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/angular-translate-loader-static-files/2.16.0/angular-translate-loader-static-files.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/angular-translate-loader-static-files.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/datalist-polyfill/1.14.0/datalist-polyfill.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/datalist-polyfill.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/jstz/1.0.10/dist/jstz.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/jstz.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/simonwep__pickr/1.2.6/dist/pickr.es5.min.js</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/pickr.es5.min.js</destinationFile>
+                                </fileSet>
+                                <fileSet>
+                                    <sourceFile>${project.build.directory}/${project.build.finalName}/webjars/simonwep__pickr/1.2.6/dist/themes/monolith.min.css</sourceFile>
+                                    <destinationFile>${project.build.directory}/${project.build.finalName}/static/monolith.min.css</destinationFile>
+                                </fileSet>
+                            </fileSets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -257,7 +592,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.1.2</version>
+            <version>1.1.3</version>
         </dependency>
         
         <!-- Guacamole Java API -->
@@ -280,117 +615,6 @@
             <artifactId>guacamole-common-js</artifactId>
             <version>1.1.0</version>
             <type>zip</type>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- WebJars servlet (for serving org.webjars.* resources) -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>webjars-servlet-2.x</artifactId>
-            <version>1.5</version>
-        </dependency>
-
-        <!-- Polyfills for the Blob and FileSaver APIs -->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>blob-polyfill</artifactId>
-            <version>1.0.20150320</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>filesaver</artifactId>
-            <version>1.3.3</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Lodash -->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>lodash</artifactId>
-            <version>4.17.10</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- jQuery -->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>jquery</artifactId>
-            <version>3.3.1</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- AngularJS -->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular</artifactId>
-            <version>1.6.9</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular-route</artifactId>
-            <version>1.6.9</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular-touch</artifactId>
-            <version>1.6.9</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Shim allowing arbitrary retrieval/creation order for AngularJS modules -->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular-module-shim</artifactId>
-            <version>0.0.4</version>
-            <scope>runtime</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.webjars.bower</groupId>
-                    <artifactId>angular</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Translation support for AngularJS -->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular-translate</artifactId>
-            <version>2.16.0</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular-translate-interpolation-messageformat</artifactId>
-            <version>2.16.0</version>
-            <scope>runtime</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.webjars.bower</groupId>
-                    <artifactId>messageformat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>messageformat</artifactId>
-            <version>1.0.2</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular-translate-loader-static-files</artifactId>
-            <version>2.16.0</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Polyfill for <datalist> element support -->
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>datalist-polyfill</artifactId>
-            <version>1.14.0</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -492,20 +716,6 @@
                 </exclusion>
             </exclusions>
 
-        </dependency>
-        
-        <!-- JSTZ for TimeZone Detection -->
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>jstz</artifactId>
-            <version>1.0.10</version>
-        </dependency>
-
-        <!-- Pickr (JavaScript color picker) -->
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>simonwep__pickr</artifactId>
-            <version>1.2.6</version>
         </dependency>
 
     </dependencies>
