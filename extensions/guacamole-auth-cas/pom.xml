@@ -70,7 +70,7 @@
                     <sourceDir>${basedir}/src/main/resources</sourceDir>
                     <include>**/*.html</include>
                     <target>${basedir}/src/main/resources/generated/templates-main/templates.js</target>
-                    <prefix>app/ext/guac-cas</prefix>
+                    <prefix>app/ext/cas</prefix>
                 </configuration>
             </plugin>
 

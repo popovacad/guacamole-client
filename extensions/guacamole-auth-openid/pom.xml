@@ -70,7 +70,7 @@
                     <sourceDir>${basedir}/src/main/resources</sourceDir>
                     <include>**/*.html</include>
                     <target>${basedir}/src/main/resources/generated/templates-main/templates.js</target>
-                    <prefix>app/ext/guac-openid</prefix>
+                    <prefix>app/ext/openid</prefix>
                 </configuration>
             </plugin>
 

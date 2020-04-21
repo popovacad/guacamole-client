@@ -25,7 +25,7 @@ angular.module('guacCAS').config(['formServiceProvider',
 
     // Define field for ticket from CAS service
     formServiceProvider.registerFieldType("GUAC_CAS_TICKET", {
-        templateUrl   : 'app/ext/guac-cas/templates/casTicketField.html',
+        templateUrl   : 'app/ext/cas/templates/casTicketField.html',
         controller    : 'guacCASController',
         module        : 'guacCAS'
     });
