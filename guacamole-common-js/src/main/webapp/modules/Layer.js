@@ -168,7 +168,7 @@ Guacamole.Layer = function(width, height) {
             canvas.height = canvasHeight;
 
             // Redraw old data, if any
-            if (oldData)
+            if (oldData && canvas.width !== 0 && canvas.height !== 0)
                 context.drawImage(oldData,
                     0, 0, oldData.width, oldData.height,
                     0, 0, oldData.width, oldData.height);
