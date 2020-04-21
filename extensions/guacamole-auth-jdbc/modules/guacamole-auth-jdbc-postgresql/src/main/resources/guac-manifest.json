@@ -15,7 +15,7 @@
     ],
 
     "html" : [
-        "html/shared-connection.html"
+        "html/jdbcShareTag.html"
     ],
 
     "translations" : [

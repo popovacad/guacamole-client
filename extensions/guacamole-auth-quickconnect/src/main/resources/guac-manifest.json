@@ -17,7 +17,7 @@
     ],
 
     "html" : [
-        "templates/quickconnectField.html"
+        "html/quickconnectField.html"
     ],
 
     "translations" : [
