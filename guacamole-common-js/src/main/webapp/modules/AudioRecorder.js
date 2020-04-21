@@ -190,11 +190,16 @@ Guacamole.RawAudioRecorder = function RawAudioRecorder(stream, mimetype) {
     // at all or do not implement it completely need the getUserMedia
     // method defined.  This shims in this function by detecting
     // one of the supported legacy methods.
-    if (!navigator.mediaDevices.getUserMedia)
-        navigator.mediaDevices.getUserMedia = (navigator.getUserMedia
+    if (!navigator.mediaDevices.getUserMedia) {
+        var getUserMediaFunc = (navigator.getUserMedia
                 || navigator.webkitGetUserMedia
                 || navigator.mozGetUserMedia
-                || navigator.msGetUserMedia).bind(navigator);
+                || navigator.msGetUserMedia);
+
+        if (getUserMediaFunc) {
+            navigator.mediaDevices.getUserMedia = getUserMediaFunc.bind(navigator);
+        }
+    }
 
     /**
      * Guacamole.ArrayBufferWriter wrapped around the audio output stream
@@ -421,6 +426,10 @@ Guacamole.RawAudioRecorder = function RawAudioRecorder(stream, mimetype) {
      * @private
      */
     var beginAudioCapture = function beginAudioCapture() {
+
+        // Check if we have valid getUserMedia()
+        if (!navigator.mediaDevices.getUserMedia)
+            return;
 
         // Attempt to retrieve an audio input stream from the browser
         navigator.mediaDevices.getUserMedia({ 'audio' : true }, function streamReceived(stream) {
