@@ -10,8 +10,8 @@
 
     "TOTP" : {
 
-        "ACTION_HIDE_DETAILS" : "Показать",
-        "ACTION_SHOW_DETAILS" : "Спрятать",
+        "ACTION_HIDE_DETAILS" : "Спрятать",
+        "ACTION_SHOW_DETAILS" : "Показать",
 
         "FIELD_HEADER_ALGORITHM"  : "Алгоритм:",
         "FIELD_HEADER_DIGITS"     : "Количество цифр:",
