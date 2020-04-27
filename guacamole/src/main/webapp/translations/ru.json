@@ -511,6 +511,8 @@
         "FIELD_OPTION_SECURITY_RDP"   : "RDP-шифрование",
         "FIELD_OPTION_SECURITY_TLS"   : "TLS-шифрование",
 
+        "FIELD_OPTION_SERVER_LAYOUT_RU_RU_QWERTY_LAT" : "Русская+Lat (Qwerty)",
+
         "NAME" : "RDP",
 
         "SECTION_HEADER_AUTHENTICATION"     : "Аутентификация",
